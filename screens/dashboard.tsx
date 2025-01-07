@@ -22,12 +22,7 @@ export default function ({navigation, route}: Props) {
       <Button
         title="add data"
         onPress={() => {
-          FirestoreService.collection('test')
-            .addDocument({title: 'aaa'})
-            .then(v => console.log("=========>",v));
-
-          console.log("jjjjjjjj");
-          
+          FirestoreService.collection('test').addDocument({title: 'aaa'});
         }}
       />
     </View>
