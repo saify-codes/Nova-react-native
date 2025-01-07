@@ -25,6 +25,10 @@ export default class Auth {
         }
     }
 
+    static logout() {
+        auth().signOut()
+    }
+
     static register(provider: Provider, credentials: Credentials) {
 
         switch (provider) {

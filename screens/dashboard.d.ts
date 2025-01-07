@@ -1,4 +1,4 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
-import { RootStackParamList } from '../App.d'
+import { DrawerScreenProps } from "@react-navigation/drawer"
 
-export type Props = NativeStackScreenProps<RootStackParamList, "Dashboard">
+export type Props = DrawerScreenProps<RootStackParamList, "Dashboard">

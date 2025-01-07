@@ -1,13 +1,19 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RootStackParamList} from './route';
+import {RootStackParamList} from './route.d';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import Dashboard from '../screens/dashboard';
 
 export default function () {
-  const Stack = createNativeStackNavigator<RootStackParamList>();
+  const Drawer = createDrawerNavigator<RootStackParamList>();
   return (
-    <Stack.Navigator initialRouteName="Dashboard">
-      <Stack.Screen name="Dashboard" component={Dashboard} />
-    </Stack.Navigator>
+    <Drawer.Navigator initialRouteName="Dashboard">
+      <Drawer.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Drawer.Navigator>
   );
 }
