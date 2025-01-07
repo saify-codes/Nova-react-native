@@ -1,5 +1,6 @@
 import {Button, Text, View} from 'react-native';
 import {Props} from './dashboard.d';
+import auth from '@react-native-firebase/auth';
 import Snackbar from 'react-native-snackbar';
 
 export default function ({navigation, route}: Props) {
@@ -7,12 +8,14 @@ export default function ({navigation, route}: Props) {
     <View>
       <Text>Dashboard</Text>
       <Button
-        title="snack"
+        title="sign out"
         onPress={() => {
           Snackbar.show({
-            text: 'Hello world',
+            text: 'Signout',
             duration: Snackbar.LENGTH_SHORT,
           });
+
+          auth().signOut();
         }}
       />
     </View>

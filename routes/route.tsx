@@ -1,25 +1,32 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {useEffect, useState} from 'react';
-import Auth from './auth';
-import Guest from './guest';
+import {useLayoutEffect, useState} from 'react';
+
+import AuthStack from './auth';
+import GuestStack from './guest';
 import Fullpageloader from '../components/loaders/fullpageloader';
+import Auth from '../services/firebase/firebaseAuthService';
+import type {User} from '../services/firebase/firebaseAuthService.d';
 
 export default function () {
-  const [status, setAuthenticationStatus] = useState('loading');
+  // Set an initializing state whilst Firebase connects
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState<User>(null);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setAuthenticationStatus('authenticated');
-    }, 3000);
-  }, [status]);
+  // Handle user state changes
+  function onAuthStateChanged(user: User) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
 
-  if (status === 'loading') {
+  useLayoutEffect(() => Auth.onAuthStateChanged(onAuthStateChanged), []);
+
+  if (initializing) {
     return <Fullpageloader />;
   }
 
   return (
     <NavigationContainer>
-      {status === 'authenticated' ? <Auth /> : <Guest />}
+      {user ? <AuthStack /> : <GuestStack />}
     </NavigationContainer>
   );
 }
