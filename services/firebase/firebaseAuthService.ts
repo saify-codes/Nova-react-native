@@ -44,7 +44,7 @@ export default class Auth {
                 throw Error('invalid provider')
         }
     }
-    
+
     static onAuthStateChanged(fn: CallbackOrObserver<FirebaseAuthTypes.AuthListenerCallback>) {
         return auth().onAuthStateChanged(fn)
     }
